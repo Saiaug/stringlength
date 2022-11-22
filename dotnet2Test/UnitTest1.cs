@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using dotnet2;
+using System.ComponentModel.DataAnnotations;
 
 namespace dotnet2Test
 {
@@ -18,6 +19,7 @@ namespace dotnet2Test
             //Arrange
             // string str = "123";
             //Act
+
             int l = 0;
             foreach (char chr in str)
             {
@@ -26,9 +28,17 @@ namespace dotnet2Test
             }
             int len = LengthHelper.FindLength(str);
             // var expected = l;
-            Assert.Equal(3, len );
+            Assert.Equal(l, len );
             
 
+        }
+        //[Theory]
+        [Fact]
+        public void findLengthForNullString()
+        {
+            string strl = null;
+            var ex = Assert.Throws<InvalidOperationException>(() => LengthHelper.FindLength(strl));
+            Assert.Equal("Invalid number", ex.Message);
         }
     }
 }
